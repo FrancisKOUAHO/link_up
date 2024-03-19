@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+      target: dependencies
+    container_name: back
+    restart: unless-stopped
+    depends_on:
+      - database
+    ports:
+      - "3333:3333"
+      - "9229:9229"
+    volumes:
+      - ./back:/home/node/app
+    command: dumb-init node ace serve --watch --node-args="--inspect=0.0.0.0"
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: dashboard
+    restart: unless-stopped
+    volumes:
+      - ./dashboard:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - /usr/src/app/.next/cache
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    tty: true
+
+  database:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: linkup
+      POSTGRES_PASSWORD: linkup
+      POSTGRES_DB: linkup
+
+networks:
+  local_bridge:
+    name: docker_network
+    driver: bridge
+    attachable: false
+
+volumes:
+  psql-data:
+    driver: local
