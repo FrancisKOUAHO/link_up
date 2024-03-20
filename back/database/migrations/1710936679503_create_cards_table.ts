@@ -17,6 +17,7 @@ export default class extends BaseSchema {
       table.string('phone')
       table.string('email')
       table.string('website')
+      table.string('image')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

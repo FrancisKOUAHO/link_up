@@ -23,6 +23,9 @@ export default class Card extends BaseModel {
   @column()
   declare website: string
 
+  @column()
+  declare image: string
+
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
