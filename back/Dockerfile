@@ -1,4 +1,4 @@
-FROM node:21.1-alpine
+FROM node:20.11.1
 
 WORKDIR /usr/src/app
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ["yarn", "dev"]
+CMD [ "yarn", "dev" ]

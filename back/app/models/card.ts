@@ -12,6 +12,9 @@ export default class Card extends BaseModel {
   declare enterprise_id: string
 
   @column()
+  declare user_id: string
+
+  @column()
   declare name: string
 
   @column()

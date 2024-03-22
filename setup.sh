@@ -4,7 +4,9 @@ docker compose down -v
 
 docker compose up --build -d --remove-orphans
 
-docker exec -it back node ace migration:rollback --batch 0  
+sleep 10
+
+docker exec -it back node ace migration:rollback --batch 0
 
 docker exec -it back node ace migration:run  
 
