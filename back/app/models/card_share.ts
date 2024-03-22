@@ -5,23 +5,25 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class CardShare extends BaseModel {
   @column({ isPrimary: true })
-  declare id: string
+  public id: string
 
   @column()
-  declare card_id: string
+  public card_id: string
 
   @column()
-  declare user_id: string
+  public shared_by: string // Utilisez le nom correct de la colonne basé sur votre migration
 
-  @belongsTo(() => User)
-  declare user: BelongsTo<typeof User>
+  @belongsTo(() => User, {
+    foreignKey: 'shared_by', // Assurez-vous que cela correspond à la colonne dans la base de données
+  })
+  public user: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
-  declare sharedAt: DateTime | null
+  public sharedAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare createdAt: DateTime
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  public updatedAt: DateTime
 }
