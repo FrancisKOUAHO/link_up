@@ -3,7 +3,7 @@ import User from '#models/user'
 import hash from '@adonisjs/core/services/hash'
 
 export default class SessionController {
-  async signIn({ request, response }: HttpContext) {
+  async signIn({ auth, request, response }: HttpContext) {
     const { email, password } = request.only(['email', 'password'])
 
     const user: User | null = await User.findBy('email', email)
@@ -21,6 +21,7 @@ export default class SessionController {
     }
 
     const getUser: User = await User.verifyCredentials(email, password)
+    await auth.use('web').login(getUser)
 
     return response.ok(getUser)
   }
@@ -56,4 +57,5 @@ export default class SessionController {
 
     return response.json({ message: 'User logged out' })
   }
+
 }
