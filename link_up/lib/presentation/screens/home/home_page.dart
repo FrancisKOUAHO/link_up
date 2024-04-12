@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
-
+import 'package:nfc_manager/nfc_manager.dart';
 
 import '../../themes/colors.dart';
 
@@ -13,24 +12,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController writerController = TextEditingController();
+  ValueNotifier<dynamic> result = ValueNotifier(null);
 
-  @override
-  initState() {
-    super.initState();
-    writerController.text = 'Flutter NFC Scan';
-    FlutterNfcReader.onTagDiscovered().listen((onData) {
-      print(onData.id);
-      print(onData.content);
-    });
-  }
+  void _startNFCReading() async {
+    try {
+      bool isAvailable = await NfcManager.instance.isAvailable();
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is removed from the
-    // widget tree.
-    writerController.dispose();
-    super.dispose();
+      //We first check if NFC is available on the device.
+      if (isAvailable) {
+        //If NFC is available, start an NFC session and listen for NFC tags to be discovered.
+        NfcManager.instance.startSession(
+          onDiscovered: (NfcTag tag) async {
+            // Process NFC tag, When an NFC tag is discovered, print its data to the console.
+            debugPrint('NFC Tag Detected: ${tag.data}');
+          },
+        );
+      } else {
+        debugPrint('NFC not available.');
+      }
+    } catch (e) {
+      debugPrint('Error reading NFC: $e');
+    }
   }
 
   @override
@@ -149,23 +151,21 @@ class _HomePageState extends State<HomePage> {
                                   icon: Icon(FontAwesomeIcons.twitter,
                                       color: fCL),
                                   onPressed: () {
-                                    FlutterNfcReader.read(instruction: "It's reading");
+                                    _startNFCReading();
                                   },
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.instagram,
                                       color: fCL),
                                   onPressed: () {
-                                    FlutterNfcReader.read(instruction: "It's reading");
+                                    _startNFCReading();
                                   },
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.whatsapp,
                                       color: fCL),
                                   onPressed: () {
-                                    FlutterNfcReader.write(" ", writerController.text).then((value) {
-                                      print(value.content);
-                                    });
+                                    _startNFCReading();
                                   },
                                 ),
                               ],
