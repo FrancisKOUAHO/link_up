@@ -3,6 +3,7 @@ import 'package:link_up/presentation/screens/splash_page.dart';
 import 'package:link_up/presentation/themes/style.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,7 +21,6 @@ class MyApp extends StatelessWidget {
         }
       },
       child: MaterialApp(
-        title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: Stlyes.themeData(),
         home: const SplashPage(),

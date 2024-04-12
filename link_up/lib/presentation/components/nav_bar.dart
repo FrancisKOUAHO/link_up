@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:link_up/presentation/screens/favorite/favorite_page.dart';
 import 'package:link_up/presentation/screens/home/home_page.dart';
 import 'package:link_up/presentation/screens/profil/profil_page.dart';
 
@@ -18,7 +17,6 @@ class _NavBarState extends State<NavBar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
-    const FavoritePage(),
     const ProfilPage(),
   ];
 

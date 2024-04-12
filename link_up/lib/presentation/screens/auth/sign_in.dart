@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:link_up/presentation/components/nav_bar.dart';
 import 'package:link_up/presentation/screens/auth/sign_up.dart';
 
 import '../../components/main_button.dart';
@@ -7,6 +6,7 @@ import '../../components/text_fild.dart';
 import '../../themes/colors.dart';
 import '../../themes/space.dart';
 import '../../themes/text_style.dart';
+import '../home/home_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -74,7 +74,7 @@ class _SignInPageState extends State<SignInPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (builder) => const NavBar()));
+                                builder: (builder) => const HomePage()));
                       },
                       text: 'Sign in',
                       btnColor: blueButton,

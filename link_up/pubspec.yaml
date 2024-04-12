@@ -1,5 +1,5 @@
 name: link_up
-description: "A new Flutter project."
+description: " link_up is a mobile application that allows users to connect with each other and share their experiences. "
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0-247.0.dev <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -40,6 +40,8 @@ dependencies:
   animations: ^2.0.11
   google_nav_bar: ^5.0.6
   lottie: ^3.1.0
+  font_awesome_flutter: ^10.7.0
+  nfc_manager: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/image/
+    - assets/image/avatar.jpg
     - assets/icon/
 
   fonts:
